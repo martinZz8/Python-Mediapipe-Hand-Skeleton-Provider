@@ -1,4 +1,5 @@
 # archive directory
 /data
+/old_data
 /.idea
 /__pycache__
