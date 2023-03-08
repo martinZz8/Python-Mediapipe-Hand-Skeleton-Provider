@@ -58,7 +58,7 @@ with mp_hands.Hands(
         # Determine files inside specific dir
         inner_folder_name = IMAGES_FN+folder_name
         file_names = [f for f in listdir(inner_folder_name) if isfile(joinpath(inner_folder_name, f))]
-        file_names = list(filter(lambda x: ".png" in x, file_names))
+        file_names = list(filter(lambda x: (".png" in x) or (".bmp" in x), file_names))
 
         # Process each file individually
         # NOTE: Start processing from this 'for', when you don't want to search in multiple directories
