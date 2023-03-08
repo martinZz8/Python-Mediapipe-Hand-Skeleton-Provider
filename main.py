@@ -67,7 +67,9 @@ with mp_hands.Hands(
         for idx, file_name in enumerate(file_names):
             print(f"Processing file: {file_name} ...")
             # Get file_name without extension
-            file_name_wo_ext = file_name.split(".")[0]
+            splitted_file_name = file_name.split(".")
+            file_name_wo_ext = ".".join(splitted_file_name[0:(len(splitted_file_name)-1)])
+            print(f"file_name_wo_ext: {file_name_wo_ext}")
 
             # Read an image, flip it around y-axis for correct handedness output (see above).
             input_file_path = IMAGES_FN + "/" + folder_name + "/" + file_name
