@@ -8,7 +8,7 @@ from os.path import isfile, isdir, join as joinpath
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 mp_hands = mp.solutions.hands
-# 21 fingers enums
+# 21 fingers enums (each has '.name' and '.value' property)
 list_of_fingers_enums = [
     mp_hands.HandLandmark.WRIST,
     mp_hands.HandLandmark.THUMB_CMC,
