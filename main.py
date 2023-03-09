@@ -34,7 +34,7 @@ list_of_fingers_enums = [
 ]
 
 # -- Options --
-is_save_skeleton_data = True  # True
+is_save_skeleton_data = True  # default: True
 is_save_image_with_skeleton = False
 is_draw_skeleton = False
 max_num_hands = 1
