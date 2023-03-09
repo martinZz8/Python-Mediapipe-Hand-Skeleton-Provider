@@ -44,8 +44,8 @@ IMAGES_FN = "data/images/"
 SKELETONS_FN = "data/skeletons/"
 
 # Get inside folder names
-folder_names = [f for f in listdir(IMAGES_FN) if isdir(IMAGES_FN)]
-
+folder_names = [f for f in listdir(IMAGES_FN) if isdir(joinpath(IMAGES_FN, f))]
+print(f"folders: {folder_names}")
 # -- Starting proper script for points determination --
 with mp_hands.Hands(
         static_image_mode=True,
@@ -56,9 +56,9 @@ with mp_hands.Hands(
         print(f"{fn_idx+1} of {len(folder_names)}")
         print(f"Processing folder: {folder_name} ...")
         # Determine files inside specific dir
-        inner_folder_name = IMAGES_FN+folder_name
+        inner_folder_name = IMAGES_FN + folder_name
         file_names = [f for f in listdir(inner_folder_name) if isfile(joinpath(inner_folder_name, f))]
-        file_names = list(filter(lambda x: (".png" in x) or (".bmp" in x), file_names))
+        file_names = list(filter(lambda x: ".png" in x, file_names))
 
         # Process each file individually
         # NOTE: Start processing from this 'for', when you don't want to search in multiple directories
