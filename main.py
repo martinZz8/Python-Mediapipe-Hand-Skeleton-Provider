@@ -45,7 +45,7 @@ SKELETONS_FN = "data/skeletons/"
 
 # Get inside folder names
 folder_names = [f for f in listdir(IMAGES_FN) if isdir(joinpath(IMAGES_FN, f))]
-print(f"folders: {folder_names}")
+
 # -- Starting proper script for points determination --
 with mp_hands.Hands(
         static_image_mode=True,
