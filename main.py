@@ -33,11 +33,16 @@ list_of_fingers_enums = [
     mp_hands.HandLandmark.PINKY_TIP
 ]
 
-# -- Options --
+# -- General Options --
 is_save_skeleton_data = True  # default: True
 is_save_image_with_skeleton = False
 is_draw_skeleton = False
+
+# -- Algorithm options --
+static_image_mode = True
 max_num_hands = 1
+min_detection_confidence = 0.0
+model_complexity = 1
 
 # -- Defining folder names -- (these folder have to be created!)
 IMAGES_FN = "data/images/"
@@ -48,9 +53,10 @@ folder_names = [f for f in listdir(IMAGES_FN) if isdir(joinpath(IMAGES_FN, f))]
 
 # -- Starting proper script for points determination --
 with mp_hands.Hands(
-        static_image_mode=True,
+        static_image_mode=static_image_mode,
         max_num_hands=max_num_hands,
-        min_detection_confidence=0.5
+        min_detection_confidence=min_detection_confidence,
+        model_complexity=model_complexity
 ) as hands:
     for fn_idx, folder_name in enumerate(folder_names):
         print(f"{fn_idx+1} of {len(folder_names)}")
@@ -66,7 +72,7 @@ with mp_hands.Hands(
         #       also remove 'folder_name' concatenation in determining output file names: 'output_txt_file_path' and 'output_image_file_path'
         mkdirCounter = 0
         for idx, file_name in enumerate(file_names):
-            print(f"Processing file: {file_name} ...")
+            print(f"{idx+1}) Processing file: {file_name} ...")
             # Get file_name without extension
             splitted_file_name = file_name.split(".")
             file_name_wo_ext = ".".join(splitted_file_name[0:(len(splitted_file_name)-1)])
