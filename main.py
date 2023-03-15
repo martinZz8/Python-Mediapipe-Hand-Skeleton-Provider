@@ -58,12 +58,13 @@ with mp_hands.Hands(
         # Determine files inside specific dir
         inner_folder_name = IMAGES_FN + folder_name
         file_names = [f for f in listdir(inner_folder_name) if isfile(joinpath(inner_folder_name, f))]
-        file_names = list(filter(lambda x: (".png" in x) or (".jpg" in x) or (".jpeg" in x), file_names))
+        file_names = list(filter(lambda x: (".png" in x) or (".jpg" in x) or (".jpeg" in x) or (".bmp" in x), file_names))
 
         # Process each file individually
         # NOTE: Start processing from this 'for', when you don't want to search in multiple directories
         #       remove creation of directories
         #       also remove 'folder_name' concatenation in determining output file names: 'output_txt_file_path' and 'output_image_file_path'
+        mkdirCounter = 0
         for idx, file_name in enumerate(file_names):
             print(f"Processing file: {file_name} ...")
             # Get file_name without extension
@@ -79,7 +80,10 @@ with mp_hands.Hands(
             # Print handedness, determine shape of image and copy the image
             #print('Handedness:', results.multi_handedness)
             if not results.multi_hand_landmarks:
+                print("Warning: No hand landmarks!")
                 continue
+            else:
+                print(f"Got {len(results.multi_hand_landmarks[0].landmark)} points")
             image_height, image_width, _ = image.shape
             annotated_image = image.copy()
 
@@ -110,11 +114,13 @@ with mp_hands.Hands(
                 # Write hand skeleton data to .txt file
                 if is_save_skeleton_data:
                     # Create output folder for skeleton
-                    try:
-                        folder_to_create_path = SKELETONS_FN + folder_name
-                        mkdir(folder_to_create_path)
-                    except FileExistsError as err:
-                        print(f"Warning: Directory {folder_to_create_path} already exists!")
+                    if mkdirCounter == 0:
+                        try:
+                            folder_to_create_path = SKELETONS_FN + folder_name
+                            mkdir(folder_to_create_path)
+                            mkdirCounter += 1
+                        except FileExistsError as err:
+                            print(f"Warning: Directory {folder_to_create_path} already exists!")
 
                     # Form path for file
                     output_txt_file_path = SKELETONS_FN + folder_name + "/" + file_name_wo_ext
