@@ -34,15 +34,15 @@ list_of_fingers_enums = [
 ]
 
 # -- General Options --
-is_save_skeleton_data = True  # default: True
-is_save_image_with_skeleton = False
-is_draw_skeleton = False
+is_save_skeleton_data = True # (default: True)
+is_save_image_with_skeleton = False # (default: False)
+is_draw_skeleton = False # (default: False)
 
 # -- Algorithm options --
-static_image_mode = True
-max_num_hands = 1
-min_detection_confidence = 0.0
-model_complexity = 1
+static_image_mode = True # (default: False)
+max_num_hands = 1 # (default: 2)
+min_detection_confidence = 0.0 # value in range [0; 1] (default: 0.5)
+model_complexity = 1 # 0 or 1 (default 1)
 
 # -- Defining folder names -- (these folder have to be created!)
 IMAGES_FN = "data/images/"
